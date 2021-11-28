@@ -1,6 +1,15 @@
 <p>dotgrid works!</p>
 <div>{{  DateStr  }}</div>
-<div>meat</div>
-<div >
-</div>
-    <app-monthdot *ngFor="let month of months" [month]="month"></app-monthdot>
+<form (submit)="log()">
+    <div class="form-group">
+        <label for="birthDate">Birth Date</label>
+        <input 
+            [(ngModel)]="birthDateInput" 
+            name="birthDateInput" 
+            id="birthDate"
+            type="date" 
+            class="form-control">
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+<app-monthdot *ngFor="let month of person" [month]="month"></app-monthdot>

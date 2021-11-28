@@ -11,7 +11,7 @@ import { MonthdotComponent } from './monthdot/monthdot.component';
   declarations: [
     AppComponent,
     DotgridComponent,
-    MonthdotComponent
+    MonthdotComponent,
   ],
   imports: [
     BrowserModule,

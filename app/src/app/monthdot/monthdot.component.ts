@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Month } from '../month';
+// import { Month } from '../month';
+import { Age } from '../age';
 
 @Component({
   selector: 'app-monthdot',
@@ -7,5 +8,5 @@ import { Month } from '../month';
   styleUrls: ['./monthdot.component.sass']
 })
 export class MonthdotComponent  {
-  @Input("month") month!: Month;
+  @Input("month") month!: Age;
 }
