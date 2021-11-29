@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { Age } from '../age';
 import { Month } from '../month';
+import { Row } from '../row';
 @Component({
   selector: 'app-dotgrid',
   templateUrl: './dotgrid.component.html',
   styleUrls: ['./dotgrid.component.sass']
 })
 export class DotgridComponent implements OnInit {
-
+  //grid has 1080 dots in it, arranged into 30 rows of 36 months
   constructor() { 
     this.birthDateInput = '';
     this.birthDate = new Date();
     this.person = new Array<Age>();
+    this.rows = new Array<Row>();
   }
   log() {
     console.log(this.birthDateInput)
@@ -19,16 +21,40 @@ export class DotgridComponent implements OnInit {
     this.birthDate = new Date(this.birthDateInput);
     console.log(this.birthDate);
     let currentAge = new Age(this.birthDate.getFullYear(), this.birthDate.getMonth(), this.birthDate.getDate());
-    while (currentAge.years < 90) {
-      currentAge.addMonth();
-      let copyObj = Object.assign({}, currentAge);
-      //console.log({copyObj, ispast: currentAge.isPast()});
-      this.person.push(copyObj);
+    this.rows = new Array<Row>();
+    while (this.rows.length < 30) {
+      let row = new Row();
+      while (row.months.length < 36) {
+        currentAge.addMonth();
+        row.months.push(new Month(currentAge.year, currentAge.month, currentAge.day))
+        // let copyObj = Object.assign({}, currentAge);
+        // row.months.push(copyObj);
+      }
+      this.rows.push(row);
     }
-    console.log(this.person);
-
-
+    // while (currentAge.years < 90) {
+    //   currentAge.addMonth();
+    //   let copyObj = O28ect.assign({}, currentAge);
+    //   //console.log({copyObj, ispast: currentAge.isPast()});
+    //   this.person.pus30copyObj);
+    // }
+    console.log(this.rows);
   }
+  rows: Array<Row>;
+  monthTypes = [
+    {name: "Dec", days: 31},
+    {name: "Feb", days: 28},
+    {name: "Mar", days: 31},
+    {name: "Apr", days: 30},
+    {name: "May", days: 31},
+    {name: "Jun", days: 30},
+    {name: "Jul", days: 31},
+    {name: "Aug", days: 31},
+    {name: "Sep", days: 30},
+    {name: "Oct", days: 31},
+    {name: "Nov", days: 30},
+    {name: "Dec", days: 31},
+  ];
   birthDateInput: string;
   birthDate: Date;
   DOB = '5/30/1986';
