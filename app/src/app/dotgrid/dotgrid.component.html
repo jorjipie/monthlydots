@@ -1,37 +1,50 @@
-<div>{{  DateStr  }}</div>
-<form (submit)="log()">
-    <div class="form-group">
-        <label for="birthDate">Birth Date</label>
-        <input 
-            [(ngModel)]="birthDateInput" 
-            name="birthDateInput" 
-            id="birthDate"
-            type="date" 
-            class="form-control">
+<div class="container">
+    <div class="row">
+        <form (submit)="log()">
+            <div class="form-group">
+                <label for="birthDate">Birth Date</label>
+                <input 
+                    [(ngModel)]="birthDateInput" 
+                    name="birthDateInput" 
+                    id="birthDate"
+                    type="date" 
+                    class="form-control">
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
     </div>
-    <button class="btn btn-primary" type="submit">Submit</button>
-</form>
-<table>
-    <thead *ngIf="rows.length > 0">
-        <tr>
-            <td></td>
-            <th *ngFor="let m of rows[0].months">{{ monthTypes[m.month - 1].name }}</th>
-            <!--  -->
-            <!-- m.month -->
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let row of rows">
-            <th class="nowrap">{{ row.months[0].year }}</th>
-            <td *ngFor="let m of row.months">
-                <div *ngIf="m.isPast()">⚫</div>
-                <div *ngIf="!m.isPast()">⚪</div>
-            </td><!--  -->
-            
-        </tr>
-        
-        <!-- <app-row *ngFor="let row of rows" [row]="row"></app-row> -->
-    </tbody>
-</table>
+    <div class="row">
+        <table id="monthGrid">
+            <thead *ngIf="rows.length > 0">
+                <tr>
+                    <td></td>
+                    <th 
+                        *ngFor="let m of rows[0].months; index as i" 
+                        [ngClass]="{'yearbegin' : i % 12 === 0 && i > 0}" >
+                        {{ monthTypes[m.month - 1].name }}
+                    </th>
+                    <!--  -->
+                    <!-- m.month -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let row of rows">
+                    <th class="nowrap">{{ row.months[0].year }}</th>
+                    <td
+                        *ngFor="let m of row.months; index as i" 
+                        [ngClass]="{'yearbegin' : i % 12 === 0 && i > 0}">
+                        <div *ngIf="m.isPast()">⚫</div>
+                        <div *ngIf="!m.isPast()">⚪</div>
+                    </td><!--  -->
+                    
+                </tr>
+                
+                <!-- <app-row *ngFor="let row of rows" [row]="row"></app-row> -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
 
 <!-- <app-monthdot *ngFor="let month of person" [month]="month"></app-monthdot> -->
